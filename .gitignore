@@ -2,3 +2,4 @@
 .env
 .DS_Store
 *.zip
+web/dist/*.json
