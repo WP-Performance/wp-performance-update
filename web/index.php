@@ -3,6 +3,8 @@
 namespace WPPerformance;
 
 use Dotenv\Dotenv;
+
+use function WPPerformance\helpers\createJsonInfos;
 use function WPPerformance\helpers\downloadZip;
 use function WPPerformance\helpers\extractZip;
 use function WPPerformance\helpers\force_rmdir;
@@ -13,6 +15,7 @@ require_once(dirname(__FILE__) . '/../vendor/autoload.php');
 require_once(dirname(__FILE__) . '/../helpers/releases.php');
 require_once(dirname(__FILE__) . '/../helpers/zip.php');
 require_once(dirname(__FILE__) . '/../helpers/rmdir.php');
+require_once(dirname(__FILE__) . '/../helpers/json.php');
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
@@ -34,6 +37,10 @@ if (!$last) {
 $tag_name = $last['tag_name'];
 // zipball url release
 $zipball_url = $last['zipball_url'];
+// last updated release
+$last_updated = $last['published_at'];
+// changelog release
+$changelog = $last['body'];
 
 // download zip file for last release
 downloadZip($tag_name, $zipball_url, $token);
@@ -62,3 +69,7 @@ zipFinal($dir, $repo, $distDir);
 
 // delete dir
 force_rmdir($dir);
+
+// create json infos
+$zipUrl = $_ENV['URI'] . $distDir . '/ ' . $repo . '.zip';
+createJsonInfos($distDir, $tag_name, $zipUrl, $last_updated, $changelog);
