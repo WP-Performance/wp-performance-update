@@ -1,0 +1,13 @@
+{
+    "name": "patrickfaramaz/wp-performance-update",
+    "description": "base for create auto update from github",
+    "authors": [
+        {
+            "name": "ipatate",
+            "email": "faramazpat@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
