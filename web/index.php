@@ -71,5 +71,5 @@ zipFinal($dir, $repo, $distDir);
 force_rmdir($dir);
 
 // create json infos
-$zipUrl = $_ENV['URI'] . $distDir . '/ ' . $repo . '.zip';
+$zipUrl = $_ENV['URI'] . $distDir . '/' . $repo . '.zip';
 createJsonInfos($distDir, $tag_name, $zipUrl, $last_updated, $changelog);
